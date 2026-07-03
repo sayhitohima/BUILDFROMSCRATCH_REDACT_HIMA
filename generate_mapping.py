@@ -8,8 +8,6 @@ SOURCE_FOLDER = "mock_sharepoint/source_files"
 CONFIG_FILE = "D:\\himab\\REDACT\\redact_columns.json"
 OUTPUT_MAPPING_FILE = "mapping_file.csv"
 # ==================================================
-
-
 def load_config():
     try:
         with open(CONFIG_FILE, 'r') as f:
@@ -18,40 +16,58 @@ def load_config():
         print(f"Error loading config: {e}")
         return None
 
+def is_numeric_value(val):
+    if pd.isna(val): return False
+    try:
+        float(val)
+        return True
+    except (ValueError, TypeError):
+        return False
+
 def generate_length_preserved_number(original_val, used_replacements):
-    """Generates a number that preserves length and is GUARANTEED to be different from original"""
+    """Generates a number preserving sign, length, and precision"""
     s = str(original_val).strip()
     
-    # 1. Determine digits before and after decimal
-    if '.' in s:
-        before, after = s.split('.')
+    # 1. Detect Sign
+    is_negative = s.startswith('-')
+    
+    # 2. Work with the absolute value to calculate length
+    abs_s = s.lstrip('-') 
+    
+    if '.' in abs_s:
+        before, after = abs_s.split('.')
     else:
-        before, after = s, ""
+        before, after = abs_s, ""
 
     len_before = len(before)
     len_after = len(after)
-    original_float = float(s)
+    
+    try:
+        original_float = float(s)
+    except ValueError:
+        original_float = -999999999.999 # Fallback
 
-    # Keep generating until we find a replacement that is:
-    # a) Not already used in this column
-    # b) NOT equal to the original value
     while True:
-        # Generate random digits for the 'before' part
+        # Generate random digits for 'before' (do not count minus sign)
         first_digit = str(random.randint(1, 9)) if len_before > 0 else "0"
         remaining_before = "".join([str(random.randint(0, 9)) for _ in range(len_before - 1)])
         
-        # Generate random digits for the 'after' part
+        # Generate random digits for 'after'
         random_after = "".join([str(random.randint(0, 9)) for _ in range(len_after)])
         
-        # Combine them
+        # Assemble the number
         if len_after > 0:
             replacement_str = f"{first_digit}{remaining_before}.{random_after}"
         else:
             replacement_str = f"{first_digit}{remaining_before}"
         
+        # Apply the sign back
+        if is_negative:
+            replacement_str = "-" + replacement_str
+            
         replacement_float = float(replacement_str)
         
-        # STRICT CHECK: Must be different from original AND not already used
+        # Guarantee it is different from original and not used
         if replacement_float != original_float and replacement_float not in used_replacements:
             used_replacements.add(replacement_float)
             return replacement_float
@@ -72,8 +88,7 @@ def generate_lookup():
     all_mappings = []
 
     for file_name in all_files:
-        if file_name not in files_config:
-            continue
+        if file_name not in files_config: continue
 
         print(f"Processing {file_name}...")
         file_path = os.path.join(SOURCE_FOLDER, file_name)
@@ -86,21 +101,18 @@ def generate_lookup():
 
         for col in cols_to_redact:
             if col in df.columns:
-                is_numeric = pd.api.types.is_numeric_dtype(df[col])
-                unique_vals = df[col].dropna().unique()
-                
+                # Extract values, cleaning trailing .0 for consistency
+                unique_vals = df[col].dropna().astype(str).str.replace(r'\.0$', '', regex=True).str.strip().unique()
                 used_replacements = set()
                 
                 for val in unique_vals:
-                    if is_numeric:
-                        # Now guaranteed to be different from 'val'
+                    if is_numeric_value(val):
                         replacement = generate_length_preserved_number(val, used_replacements)
                         dtype = "numeric"
                     else:
-                        # For strings, using unique ID based on set length
                         replacement = f"{file_ref}_{col.replace(' ', '')}_{len(used_replacements)}"
                         dtype = "string"
-                        used_replacements.add(replacement) # track string replacements too
+                        used_replacements.add(replacement)
                     
                     all_mappings.append({
                         "Original": str(val), 
@@ -114,7 +126,7 @@ def generate_lookup():
 
     mapping_df = pd.DataFrame(all_mappings)
     mapping_df.to_csv(OUTPUT_MAPPING_FILE, index=False)
-    print(f"\nSuccess! Guaranteed-different mapping created at: {OUTPUT_MAPPING_FILE}")
+    print(f"\nSuccess! Sign-and-Format preserved mapping created at: {OUTPUT_MAPPING_FILE}")
 
 if __name__ == "__main__":
     generate_lookup()
