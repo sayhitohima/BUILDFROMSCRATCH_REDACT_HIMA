@@ -1,0 +1,19 @@
+{
+    "Europe Sales Records.csv": [
+        "Unit Price", 
+        "Unit Cost", 
+        "Total Revenue", 
+        "Total Cost", 
+        "Total Profit", 
+        "Item Type"
+    ],
+    "US Sales Data.xlsx": {
+    
+        "sheet": "Data Sales Adidas",
+        "columns": ["Retailer", "Total Sales", "Operating Profit"]
+    },
+    "Asia Sales Records.csv": [
+        "Item Type", 
+        "Total Revenue"
+    ]
+}
