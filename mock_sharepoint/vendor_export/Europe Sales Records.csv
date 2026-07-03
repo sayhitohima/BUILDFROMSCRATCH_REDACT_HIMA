@@ -41,7 +41,7 @@ Europe,Hungary,Europe_Sales_Records_ItemType_8,Online,M,1/25/2011,128686225,3/13
 Europe,Lithuania,Europe_Sales_Records_ItemType_10,Offline,L,1/6/2012,420875346,2/18/2012,5223,317.1,442.17,1042309.5,6521464.46,663148.22
 Europe,Albania,Europe_Sales_Records_ItemType_5,Online,C,10/5/2012,476633536,11/3/2012,5310,473.42,85.93,196041.6,178434.9,709834.9
 Europe,Cyprus,Europe_Sales_Records_ItemType_5,Offline,C,7/2/2014,727997720,7/19/2014,9558,473.42,85.93,3623023.24,115362.03,451271.98
-Europe,Moldova ,Europe_Sales_Records_ItemType_11,Online,M,3/11/2013,467045819,4/12/2013,8092,38.25,85.95,382078.13,548842.61,216525.16
+Europe,Moldova,Europe_Sales_Records_ItemType_11,Online,M,3/11/2013,467045819,4/12/2013,8092,38.25,85.95,382078.13,548842.61,216525.16
 Europe,Kosovo,Europe_Sales_Records_ItemType_10,Offline,C,11/1/2012,813973891,11/13/2012,1818,317.1,442.17,825670.3,720623.83,596190.1
 Europe,Albania,Europe_Sales_Records_ItemType_10,Offline,L,9/30/2016,576944720,10/9/2016,9619,317.1,442.17,5200987.4,1355297.33,7044741.82
 Europe,Portugal,Europe_Sales_Records_ItemType_8,Online,L,8/3/2015,404789817,9/8/2015,5157,430.27,899.35,7610773.84,251808.37,843644.17
@@ -116,7 +116,7 @@ Europe,Liechtenstein,Europe_Sales_Records_ItemType_0,Online,C,9/5/2016,264163959
 Europe,Russia,Europe_Sales_Records_ItemType_3,Offline,H,10/16/2011,520915305,11/7/2011,9270,987.24,616.86,3896991.8,4083062.9,4006240.7
 Europe,Armenia,Europe_Sales_Records_ItemType_2,Online,H,2/5/2013,424181544,3/4/2013,3600,359.8,102.39,300745.1,464252.6,467690.1
 Europe,United Kingdom,Europe_Sales_Records_ItemType_3,Online,H,7/3/2015,560762631,7/16/2015,979,987.24,616.86,976350.76,749720.07,562733.89
-Europe,Moldova ,Europe_Sales_Records_ItemType_3,Offline,L,4/4/2015,458816373,4/16/2015,2815,987.24,616.86,2555624.92,8426095.7,890446.26
+Europe,Moldova,Europe_Sales_Records_ItemType_3,Offline,L,4/4/2015,458816373,4/16/2015,2815,987.24,616.86,2555624.92,8426095.7,890446.26
 Europe,Netherlands,Europe_Sales_Records_ItemType_9,Offline,L,8/18/2013,142987763,9/1/2013,2112,540.58,556.68,2191296.32,1824397.13,462058.49
 Europe,Andorra,Europe_Sales_Records_ItemType_7,Offline,C,1/23/2010,480904042,2/5/2010,9048,278.64,13.9,3878310.96,344762.46,435957.26
 Europe,Armenia,Europe_Sales_Records_ItemType_5,Online,M,12/7/2016,571323239,1/1/2017,6097,473.42,85.93,553051.47,365446.1,340546.3
@@ -125,7 +125,7 @@ Europe,Croatia,Europe_Sales_Records_ItemType_9,Online,L,4/26/2013,659196269,6/1/
 Europe,Bulgaria,Europe_Sales_Records_ItemType_11,Offline,H,10/24/2012,595496594,11/4/2012,9530,38.25,85.95,317496.2,313542.0,813789.1
 Europe,Ireland,Europe_Sales_Records_ItemType_11,Offline,H,5/30/2010,354931628,6/8/2010,1011,38.25,85.95,40721.61,58855.87,58685.87
 Europe,Spain,Europe_Sales_Records_ItemType_6,Offline,C,11/29/2011,436969029,12/17/2011,7701,296.64,255.11,2724165.71,5014878.89,223460.8
-Europe,Moldova ,Europe_Sales_Records_ItemType_5,Online,L,3/28/2016,810752236,5/4/2016,8458,473.42,85.93,6795633.42,429152.62,560194.9
+Europe,Moldova,Europe_Sales_Records_ItemType_5,Online,L,3/28/2016,810752236,5/4/2016,8458,473.42,85.93,6795633.42,429152.62,560194.9
 Europe,Italy,Europe_Sales_Records_ItemType_3,Offline,C,7/8/2011,886620128,7/25/2011,9453,987.24,616.86,6359040.5,3359636.29,3178326.48
 Europe,Finland,Europe_Sales_Records_ItemType_2,Offline,M,4/10/2010,889093768,5/20/2010,1458,359.8,102.39,568464.1,688562.23,863098.5
 Europe,Poland,Europe_Sales_Records_ItemType_2,Online,C,8/6/2011,454550588,9/6/2011,475,359.8,102.39,21187.6,39179.47,35136.06
@@ -379,7 +379,7 @@ Europe,Vatican City,Europe_Sales_Records_ItemType_1,Online,M,3/23/2012,263647687
 Europe,Switzerland,Europe_Sales_Records_ItemType_11,Offline,H,4/19/2014,653800523,4/23/2014,2958,38.25,85.95,109448.63,917576.39,89959.5
 Europe,Sweden,Europe_Sales_Records_ItemType_10,Online,L,8/24/2013,684239947,8/31/2013,661,317.1,442.17,222888.3,658794.23,206126.64
 Europe,Vatican City,Europe_Sales_Records_ItemType_11,Online,H,1/27/2016,133276450,3/15/2016,8318,38.25,85.95,663413.16,883368.3,225064.22
-Europe,Moldova ,Europe_Sales_Records_ItemType_11,Offline,L,2/17/2014,838895261,2/19/2014,6605,38.25,85.95,727436.11,831946.36,241174.0
+Europe,Moldova,Europe_Sales_Records_ItemType_11,Offline,L,2/17/2014,838895261,2/19/2014,6605,38.25,85.95,727436.11,831946.36,241174.0
 Europe,Denmark,Europe_Sales_Records_ItemType_6,Online,C,11/26/2011,198537814,12/19/2011,606,296.64,255.11,343072.47,839689.9,82006.0
 Europe,Slovenia,Europe_Sales_Records_ItemType_6,Online,M,10/10/2015,885397469,11/18/2015,7642,296.64,255.11,4390674.77,4509824.53,247059.9
 Europe,Hungary,Europe_Sales_Records_ItemType_11,Offline,H,10/16/2014,302744853,11/2/2014,7785,38.25,85.95,877301.01,346394.7,152357.7
@@ -392,7 +392,7 @@ Europe,Macedonia,Europe_Sales_Records_ItemType_6,Online,L,2/12/2017,796418511,3/
 Europe,Kosovo,Europe_Sales_Records_ItemType_10,Online,M,6/3/2011,526018369,6/21/2011,9379,317.1,442.17,2349650.1,1016311.82,8432014.24
 Europe,Montenegro,Europe_Sales_Records_ItemType_0,Offline,C,4/27/2017,122144210,5/24/2017,4041,60.41,57.54,576556.35,297909.43,11488.94
 Europe,Belarus,Europe_Sales_Records_ItemType_3,Offline,H,7/6/2016,644592607,7/31/2016,8131,987.24,616.86,6278985.66,2218621.35,4998040.72
-Europe,Moldova ,Europe_Sales_Records_ItemType_4,Online,H,11/3/2014,598404109,11/18/2014,9929,7.25,5.19,18221.85,62211.79,47992.66
+Europe,Moldova,Europe_Sales_Records_ItemType_4,Online,H,11/3/2014,598404109,11/18/2014,9929,7.25,5.19,18221.85,62211.79,47992.66
 Europe,Czech Republic,Europe_Sales_Records_ItemType_11,Online,C,4/22/2012,577530944,5/15/2012,3095,38.25,85.95,699597.92,918597.39,25302.8
 Europe,Finland,Europe_Sales_Records_ItemType_4,Offline,H,1/12/2016,182078921,2/14/2016,54,7.25,5.19,964.07,174.97,581.0
 Europe,Serbia,Europe_Sales_Records_ItemType_8,Online,H,3/22/2014,302015721,4/17/2014,2018,430.27,899.35,377224.69,219249.66,691130.19
@@ -505,7 +505,7 @@ Europe,Andorra,Europe_Sales_Records_ItemType_4,Offline,L,3/4/2016,716054379,3/26
 Europe,Austria,Europe_Sales_Records_ItemType_3,Offline,C,3/21/2015,511712110,5/7/2015,5839,987.24,616.86,7851116.51,5574970.13,784710.4
 Europe,Finland,Europe_Sales_Records_ItemType_8,Offline,C,9/7/2014,481308305,10/16/2014,8678,430.27,899.35,4976708.77,8600160.9,502898.74
 Europe,Andorra,Europe_Sales_Records_ItemType_9,Online,C,5/22/2014,266638886,6/19/2014,3227,540.58,556.68,7362514.78,4791821.39,795694.73
-Europe,Moldova ,Europe_Sales_Records_ItemType_6,Online,H,9/17/2012,638314521,10/15/2012,306,296.64,255.11,819197.69,335490.12,73202.1
+Europe,Moldova,Europe_Sales_Records_ItemType_6,Online,H,9/17/2012,638314521,10/15/2012,306,296.64,255.11,819197.69,335490.12,73202.1
 Europe,Switzerland,Europe_Sales_Records_ItemType_10,Online,M,4/15/2015,811977040,5/28/2015,905,317.1,442.17,130649.6,202771.88,879500.37
 Europe,Netherlands,Europe_Sales_Records_ItemType_6,Online,M,10/9/2010,344160735,11/20/2010,3664,296.64,255.11,4826423.14,9419434.66,246255.9
 Europe,Russia,Europe_Sales_Records_ItemType_9,Online,H,4/3/2017,549058330,5/11/2017,7416,540.58,556.68,9556645.2,6091109.31,6928765.71
@@ -565,7 +565,7 @@ Europe,Andorra,Europe_Sales_Records_ItemType_8,Offline,C,6/24/2017,174614226,8/1
 Europe,Vatican City,Europe_Sales_Records_ItemType_7,Offline,L,6/2/2011,118859469,7/1/2011,2013,278.64,13.9,884229.49,193189.06,962775.69
 Europe,Belarus,Europe_Sales_Records_ItemType_10,Offline,H,7/30/2015,669550883,9/16/2015,3840,317.1,442.17,3072623.3,4699119.7,712540.9
 Europe,United Kingdom,Europe_Sales_Records_ItemType_11,Online,M,6/17/2012,439114367,6/26/2012,2554,38.25,85.95,839222.58,197514.89,42167.59
-Europe,Moldova ,Europe_Sales_Records_ItemType_9,Online,M,1/31/2011,582563626,2/19/2011,2378,540.58,556.68,9149500.37,7489772.03,463557.9
+Europe,Moldova,Europe_Sales_Records_ItemType_9,Online,M,1/31/2011,582563626,2/19/2011,2378,540.58,556.68,9149500.37,7489772.03,463557.9
 Europe,Latvia,Europe_Sales_Records_ItemType_7,Online,M,2/8/2013,943274819,3/8/2013,4836,278.64,13.9,932371.33,788675.23,940225.3
 Europe,Hungary,Europe_Sales_Records_ItemType_3,Online,H,12/5/2010,313821303,1/17/2011,5552,987.24,616.86,3920110.04,3680821.2,175386.9
 Europe,Slovakia,Europe_Sales_Records_ItemType_0,Online,M,9/2/2015,431753098,10/19/2015,4191,60.41,57.54,656005.23,492369.57,70156.18
@@ -662,7 +662,7 @@ Europe,Vatican City,Europe_Sales_Records_ItemType_0,Offline,L,11/4/2011,51076282
 Europe,Russia,Europe_Sales_Records_ItemType_7,Offline,H,7/28/2012,189667212,9/3/2012,5598,278.64,13.9,548037.79,838407.59,705669.15
 Europe,Germany,Europe_Sales_Records_ItemType_1,Online,C,3/21/2015,276784074,4/15/2015,5413,407.49,86.93,507419.69,594394.25,694183.0
 Europe,Spain,Europe_Sales_Records_ItemType_1,Online,H,8/14/2010,744583642,9/26/2010,7701,407.49,86.93,636238.48,787713.64,977705.35
-Europe,Moldova ,Europe_Sales_Records_ItemType_0,Online,H,6/26/2015,761724030,8/13/2015,9923,60.41,57.54,298109.27,804582.64,706937.3
+Europe,Moldova,Europe_Sales_Records_ItemType_0,Online,H,6/26/2015,761724030,8/13/2015,9923,60.41,57.54,298109.27,804582.64,706937.3
 Europe,Slovakia,Europe_Sales_Records_ItemType_3,Online,C,5/5/2012,217248904,6/15/2012,7633,987.24,616.86,9429042.86,3582198.46,350485.69
 Europe,Montenegro,Europe_Sales_Records_ItemType_1,Online,L,4/29/2016,685596930,6/16/2016,2222,407.49,86.93,766153.58,63632.21,577558.68
 Europe,Greece,Europe_Sales_Records_ItemType_1,Online,H,1/31/2015,355534589,2/6/2015,9440,407.49,86.93,6784514.2,561682.0,656736.2
@@ -742,7 +742,7 @@ Europe,Spain,Europe_Sales_Records_ItemType_4,Offline,L,10/24/2015,446045196,11/1
 Europe,Lithuania,Europe_Sales_Records_ItemType_9,Offline,M,10/14/2014,544284856,10/25/2014,4839,540.58,556.68,1734389.35,6706827.51,814593.88
 Europe,Romania,Europe_Sales_Records_ItemType_5,Offline,H,11/6/2014,606118571,11/18/2014,2809,473.42,85.93,253904.51,669691.08,912282.87
 Europe,Portugal,Europe_Sales_Records_ItemType_7,Online,C,10/7/2010,583654105,10/19/2010,5075,278.64,13.9,642546.2,128287.8,870135.4
-Europe,Moldova ,Europe_Sales_Records_ItemType_8,Online,C,1/27/2014,608451879,3/1/2014,3287,430.27,899.35,778823.32,901542.21,912516.58
+Europe,Moldova,Europe_Sales_Records_ItemType_8,Online,C,1/27/2014,608451879,3/1/2014,3287,430.27,899.35,778823.32,901542.21,912516.58
 Europe,Romania,Europe_Sales_Records_ItemType_0,Online,M,5/10/2015,910886180,6/10/2015,317,60.41,57.54,91995.81,73772.23,7342.52
 Europe,Vatican City,Europe_Sales_Records_ItemType_7,Offline,L,11/5/2011,820195758,11/24/2011,3006,278.64,13.9,900181.87,415700.71,706997.36
 Europe,Lithuania,Europe_Sales_Records_ItemType_1,Online,H,6/28/2016,378216636,8/8/2016,1562,407.49,86.93,197722.44,85333.26,635378.03
@@ -785,11 +785,11 @@ Europe,Cyprus,Europe_Sales_Records_ItemType_6,Online,L,6/11/2017,333304440,7/5/2
 Europe,Russia,Europe_Sales_Records_ItemType_10,Offline,H,9/3/2014,486345708,10/11/2014,9357,317.1,442.17,9315201.7,6560678.62,4069435.61
 Europe,Malta,Europe_Sales_Records_ItemType_0,Online,M,4/30/2016,180358016,5/16/2016,800,60.41,57.54,39227.0,52353.0,59935.2
 Europe,Georgia,Europe_Sales_Records_ItemType_1,Online,H,7/18/2012,141846215,8/16/2012,4302,407.49,86.93,733810.45,435558.89,586714.28
-Europe,Moldova ,Europe_Sales_Records_ItemType_8,Offline,C,6/9/2017,252541625,7/5/2017,1534,430.27,899.35,102118.17,896011.47,919528.75
+Europe,Moldova,Europe_Sales_Records_ItemType_8,Offline,C,6/9/2017,252541625,7/5/2017,1534,430.27,899.35,102118.17,896011.47,919528.75
 Europe,Montenegro,Europe_Sales_Records_ItemType_10,Offline,C,3/29/2014,614597785,5/14/2014,1997,317.1,442.17,165870.6,324771.17,603959.45
 Europe,Sweden,Europe_Sales_Records_ItemType_11,Offline,H,5/17/2011,861976850,5/25/2011,6960,38.25,85.95,456178.6,455870.9,210854.2
 Europe,Czech Republic,Europe_Sales_Records_ItemType_1,Offline,L,8/21/2012,631463515,9/25/2012,2942,407.49,86.93,423108.93,852057.24,241113.12
-Europe,Moldova ,Europe_Sales_Records_ItemType_4,Online,M,7/29/2013,307305467,8/10/2013,7371,7.25,5.19,82425.11,24942.9,58592.86
+Europe,Moldova,Europe_Sales_Records_ItemType_4,Online,M,7/29/2013,307305467,8/10/2013,7371,7.25,5.19,82425.11,24942.9,58592.86
 Europe,Cyprus,Europe_Sales_Records_ItemType_2,Offline,H,7/5/2011,392676532,8/6/2011,567,359.8,102.39,393818.6,24896.31,67506.88
 Europe,Luxembourg,Europe_Sales_Records_ItemType_8,Online,L,5/26/2012,111063039,7/13/2012,4876,430.27,899.35,7643801.33,928036.23,496187.4
 Europe,Spain,Europe_Sales_Records_ItemType_0,Online,M,12/5/2011,556263816,12/7/2011,9679,60.41,57.54,430194.69,658103.43,267630.49
@@ -821,7 +821,7 @@ Europe,Bosnia and Herzegovina,Europe_Sales_Records_ItemType_5,Online,C,3/2/2012,
 Europe,Ukraine,Europe_Sales_Records_ItemType_0,Online,M,2/19/2014,343889510,4/2/2014,3403,60.41,57.54,671832.39,833427.21,90701.8
 Europe,Malta,Europe_Sales_Records_ItemType_8,Offline,L,6/25/2012,398104035,8/12/2012,6686,430.27,899.35,1251035.75,2373132.7,978598.68
 Europe,Slovenia,Europe_Sales_Records_ItemType_6,Offline,M,9/25/2014,631460940,10/5/2014,2180,296.64,255.11,120485.5,550242.9,175735.4
-Europe,Moldova ,Europe_Sales_Records_ItemType_7,Offline,M,5/1/2010,489848029,5/20/2010,5772,278.64,13.9,458879.45,615745.33,246498.16
+Europe,Moldova,Europe_Sales_Records_ItemType_7,Offline,M,5/1/2010,489848029,5/20/2010,5772,278.64,13.9,458879.45,615745.33,246498.16
 Europe,Vatican City,Europe_Sales_Records_ItemType_3,Online,L,11/27/2016,797788369,11/28/2016,2162,987.24,616.86,5418433.19,6687808.68,176482.3
 Europe,United Kingdom,Europe_Sales_Records_ItemType_11,Online,C,6/5/2013,430687510,6/10/2013,8860,38.25,85.95,791124.9,267759.6,116438.5
 Europe,Portugal,Europe_Sales_Records_ItemType_11,Online,H,2/11/2015,667054498,2/12/2015,5104,38.25,85.95,685080.12,176701.35,300953.47
@@ -851,7 +851,7 @@ Europe,Iceland,Europe_Sales_Records_ItemType_7,Offline,L,12/20/2016,358594453,2/
 Europe,Denmark,Europe_Sales_Records_ItemType_7,Offline,C,6/3/2013,784397923,6/15/2013,9631,278.64,13.9,5194878.22,340215.84,252873.91
 Europe,Cyprus,Europe_Sales_Records_ItemType_6,Offline,M,6/9/2017,111246287,7/2/2017,9103,296.64,255.11,6106890.49,2069055.86,585511.7
 Europe,Poland,Europe_Sales_Records_ItemType_5,Online,L,2/19/2016,777018630,3/19/2016,5935,473.42,85.93,503252.7,226255.71,436481.22
-Europe,Moldova ,Europe_Sales_Records_ItemType_1,Offline,H,9/1/2013,601588857,9/10/2013,2366,407.49,86.93,701017.38,22686.77,218216.79
+Europe,Moldova,Europe_Sales_Records_ItemType_1,Offline,H,9/1/2013,601588857,9/10/2013,2366,407.49,86.93,701017.38,22686.77,218216.79
 Europe,Russia,Europe_Sales_Records_ItemType_5,Offline,L,3/17/2014,249039304,5/1/2014,5119,473.42,85.93,333618.56,207915.64,797024.84
 Europe,Denmark,Europe_Sales_Records_ItemType_2,Online,C,11/30/2015,905947482,1/18/2016,8847,359.8,102.39,7003813.2,7235842.04,950745.32
 Europe,Italy,Europe_Sales_Records_ItemType_5,Online,H,7/22/2011,359893071,8/6/2011,9212,473.42,85.93,1096655.07,188657.96,251117.94
@@ -864,12 +864,12 @@ Europe,Poland,Europe_Sales_Records_ItemType_2,Offline,M,6/10/2011,520390880,7/24
 Europe,Bosnia and Herzegovina,Europe_Sales_Records_ItemType_4,Offline,L,10/15/2016,623821580,10/31/2016,1523,7.25,5.19,51261.64,94119.81,4059.19
 Europe,Bulgaria,Europe_Sales_Records_ItemType_6,Online,C,7/20/2010,273662412,7/23/2010,1644,296.64,255.11,657832.15,794727.37,61799.1
 Europe,Kosovo,Europe_Sales_Records_ItemType_5,Offline,M,3/8/2017,941061675,3/20/2017,9917,473.42,85.93,3771960.33,280108.66,904730.37
-Europe,Moldova ,Europe_Sales_Records_ItemType_6,Online,M,12/7/2013,421456849,12/10/2013,7302,296.64,255.11,4472938.2,9596186.28,122347.1
+Europe,Moldova,Europe_Sales_Records_ItemType_6,Online,M,12/7/2013,421456849,12/10/2013,7302,296.64,255.11,4472938.2,9596186.28,122347.1
 Europe,Andorra,Europe_Sales_Records_ItemType_10,Online,H,4/10/2012,291160714,5/26/2012,9780,317.1,442.17,4240876.9,9868778.7,6421710.4
 Europe,Georgia,Europe_Sales_Records_ItemType_4,Offline,M,1/21/2014,724085128,2/10/2014,1735,7.25,5.19,32379.47,91625.6,6933.34
 Europe,Luxembourg,Europe_Sales_Records_ItemType_5,Online,M,9/30/2014,742569196,11/17/2014,1581,473.42,85.93,865262.98,870468.67,20296.55
 Europe,Poland,Europe_Sales_Records_ItemType_9,Online,M,7/29/2016,760346877,8/6/2016,2392,540.58,556.68,9622378.94,4592283.76,168949.4
-Europe,Moldova ,Europe_Sales_Records_ItemType_10,Online,M,11/5/2015,260630738,12/19/2015,5282,317.1,442.17,7139399.9,4928391.85,734422.61
+Europe,Moldova,Europe_Sales_Records_ItemType_10,Online,M,11/5/2015,260630738,12/19/2015,5282,317.1,442.17,7139399.9,4928391.85,734422.61
 Europe,Spain,Europe_Sales_Records_ItemType_6,Online,H,4/2/2013,462561166,5/2/2013,983,296.64,255.11,974643.43,867622.98,69080.1
 Europe,Netherlands,Europe_Sales_Records_ItemType_11,Offline,H,10/2/2014,353475940,10/4/2014,240,38.25,85.95,67839.1,21618.3,5742.6
 Europe,Armenia,Europe_Sales_Records_ItemType_0,Online,H,6/5/2011,432031619,6/29/2011,6612,60.41,57.54,296674.6,644261.01,256075.72
@@ -923,7 +923,7 @@ Europe,Italy,Europe_Sales_Records_ItemType_0,Offline,C,7/27/2013,981154048,8/9/2
 Europe,Germany,Europe_Sales_Records_ItemType_11,Online,L,12/3/2012,287917602,1/5/2013,71,38.25,85.95,7928.64,5161.64,4293.48
 Europe,Cyprus,Europe_Sales_Records_ItemType_7,Offline,L,12/4/2014,548343789,12/6/2014,5967,278.64,13.9,703967.72,957137.11,790364.92
 Europe,Cyprus,Europe_Sales_Records_ItemType_6,Online,L,3/2/2016,498089492,3/22/2016,4604,296.64,255.11,7946189.15,4162387.6,493607.9
-Europe,Moldova ,Europe_Sales_Records_ItemType_7,Offline,C,3/1/2015,251907765,4/7/2015,3961,278.64,13.9,518051.24,981321.11,548542.48
+Europe,Moldova,Europe_Sales_Records_ItemType_7,Offline,C,3/1/2015,251907765,4/7/2015,3961,278.64,13.9,518051.24,981321.11,548542.48
 Europe,Malta,Europe_Sales_Records_ItemType_7,Online,L,5/26/2015,339999663,6/13/2015,2311,278.64,13.9,727579.12,738648.67,208295.39
 Europe,Russia,Europe_Sales_Records_ItemType_2,Offline,M,6/29/2012,958366000,8/3/2012,651,359.8,102.39,905952.8,68090.32,24414.01
 Europe,Norway,Europe_Sales_Records_ItemType_2,Online,M,11/4/2015,481114327,11/24/2015,1276,359.8,102.39,732073.2,435160.03,258469.8
@@ -947,7 +947,7 @@ Europe,Belgium,Europe_Sales_Records_ItemType_4,Offline,M,5/4/2011,187103450,5/14
 Europe,Romania,Europe_Sales_Records_ItemType_2,Online,H,3/14/2016,572634732,4/1/2016,4197,359.8,102.39,225915.7,778911.85,593433.49
 Europe,Serbia,Europe_Sales_Records_ItemType_5,Online,C,8/31/2014,285343968,9/5/2014,8476,473.42,85.93,4249740.97,173524.12,810261.19
 Europe,Slovenia,Europe_Sales_Records_ItemType_5,Offline,M,4/21/2013,886763894,5/27/2013,1997,473.42,85.93,586173.55,735392.02,830427.85
-Europe,Moldova ,Europe_Sales_Records_ItemType_0,Offline,C,11/4/2013,436606395,12/3/2013,389,60.41,57.54,48036.8,53585.68,3163.68
+Europe,Moldova,Europe_Sales_Records_ItemType_0,Offline,C,11/4/2013,436606395,12/3/2013,389,60.41,57.54,48036.8,53585.68,3163.68
 Europe,Kosovo,Europe_Sales_Records_ItemType_10,Online,L,9/26/2010,845738112,10/23/2010,1557,317.1,442.17,762641.7,386366.22,483218.57
 Europe,Belarus,Europe_Sales_Records_ItemType_4,Online,C,6/24/2014,669353473,7/7/2014,5422,7.25,5.19,96715.19,15389.45,61749.98
 Europe,Belgium,Europe_Sales_Records_ItemType_10,Online,M,9/29/2015,147826898,11/5/2015,4119,317.1,442.17,6551197.5,6155427.62,369087.62
@@ -965,7 +965,7 @@ Europe,Macedonia,Europe_Sales_Records_ItemType_3,Offline,C,12/17/2015,696839892,
 Europe,United Kingdom,Europe_Sales_Records_ItemType_11,Offline,M,9/22/2011,509380948,9/27/2011,5997,38.25,85.95,547141.18,801322.9,610430.96
 Europe,Russia,Europe_Sales_Records_ItemType_1,Offline,M,7/28/2011,221628844,9/1/2011,3755,407.49,86.93,221445.3,224858.4,530294.0
 Europe,Estonia,Europe_Sales_Records_ItemType_0,Online,H,2/29/2016,650208079,3/19/2016,9875,60.41,57.54,981249.71,813757.18,520196.2
-Europe,Moldova ,Europe_Sales_Records_ItemType_6,Offline,L,6/14/2010,229105556,8/3/2010,6280,296.64,255.11,1197836.6,5878686.1,102631.9
+Europe,Moldova,Europe_Sales_Records_ItemType_6,Offline,L,6/14/2010,229105556,8/3/2010,6280,296.64,255.11,1197836.6,5878686.1,102631.9
 Europe,Ukraine,Europe_Sales_Records_ItemType_3,Offline,M,3/11/2016,660481584,4/20/2016,33,987.24,616.86,33865.76,58458.13,1627.68
 Europe,Kosovo,Europe_Sales_Records_ItemType_3,Offline,H,8/3/2014,168487203,9/21/2014,7962,987.24,616.86,1099675.33,3990912.38,8536523.8
 Europe,Russia,Europe_Sales_Records_ItemType_6,Online,M,12/20/2010,609952628,1/31/2011,7392,296.64,255.11,1988082.69,1003953.75,109871.9
@@ -983,7 +983,7 @@ Europe,Denmark,Europe_Sales_Records_ItemType_0,Offline,H,9/26/2010,511155498,11/
 Europe,France,Europe_Sales_Records_ItemType_11,Online,H,10/16/2010,762655293,11/11/2010,5504,38.25,85.95,349934.96,444843.99,263767.65
 Europe,Romania,Europe_Sales_Records_ItemType_11,Offline,L,1/14/2015,119935786,1/27/2015,519,38.25,85.95,17561.64,40025.67,94507.33
 Europe,Czech Republic,Europe_Sales_Records_ItemType_7,Online,M,8/31/2010,755605590,9/11/2010,9340,278.64,13.9,3963162.7,943479.1,571712.6
-Europe,Moldova ,Europe_Sales_Records_ItemType_6,Online,M,6/13/2010,907047402,8/1/2010,4338,296.64,255.11,2701345.89,4062082.93,397419.5
+Europe,Moldova,Europe_Sales_Records_ItemType_6,Online,M,6/13/2010,907047402,8/1/2010,4338,296.64,255.11,2701345.89,4062082.93,397419.5
 Europe,Norway,Europe_Sales_Records_ItemType_4,Offline,L,8/12/2013,638937652,9/6/2013,4705,7.25,5.19,39117.23,78341.6,18344.59
 Europe,France,Europe_Sales_Records_ItemType_2,Offline,H,2/26/2016,449206340,4/3/2016,8993,359.8,102.39,5958842.7,4642288.96,225419.42
 Europe,Romania,Europe_Sales_Records_ItemType_0,Online,L,7/10/2010,864071118,7/18/2010,6700,60.41,57.54,739333.3,596213.3,434124.8
@@ -1072,7 +1072,7 @@ Europe,Cyprus,Europe_Sales_Records_ItemType_3,Offline,L,5/8/2013,897785842,5/12/
 Europe,Romania,Europe_Sales_Records_ItemType_6,Online,H,5/22/2017,929812705,5/25/2017,1097,296.64,255.11,839563.39,152091.61,68245.7
 Europe,Ukraine,Europe_Sales_Records_ItemType_10,Online,H,1/29/2012,202047002,3/6/2012,9053,317.1,442.17,8705822.6,9143234.51,4786369.24
 Europe,Kosovo,Europe_Sales_Records_ItemType_4,Online,L,8/27/2011,919922006,9/18/2011,4219,7.25,5.19,38840.01,69104.34,64736.49
-Europe,Moldova ,Europe_Sales_Records_ItemType_0,Offline,H,6/17/2013,243226420,7/3/2013,4958,60.41,57.54,133379.8,904434.04,29108.69
+Europe,Moldova,Europe_Sales_Records_ItemType_0,Offline,H,6/17/2013,243226420,7/3/2013,4958,60.41,57.54,133379.8,904434.04,29108.69
 Europe,United Kingdom,Europe_Sales_Records_ItemType_1,Online,M,11/13/2016,249765861,11/24/2016,123,407.49,86.93,81034.64,6232.75,8496.93
 Europe,Romania,Europe_Sales_Records_ItemType_0,Online,H,5/31/2016,253055322,6/12/2016,3548,60.41,57.54,423061.7,219357.38,89816.43
 Europe,Montenegro,Europe_Sales_Records_ItemType_0,Offline,C,8/6/2016,243340575,9/4/2016,8739,60.41,57.54,778330.38,863836.85,153302.72
@@ -1167,7 +1167,7 @@ Europe,Romania,Europe_Sales_Records_ItemType_8,Offline,H,6/23/2015,693831098,7/1
 Europe,Macedonia,Europe_Sales_Records_ItemType_2,Online,C,9/1/2010,963219296,9/18/2010,6850,359.8,102.39,8782640.7,704230.1,340790.9
 Europe,Austria,Europe_Sales_Records_ItemType_5,Offline,M,11/12/2016,468320834,12/21/2016,5397,473.42,85.93,892443.24,296790.65,505787.84
 Europe,Iceland,Europe_Sales_Records_ItemType_2,Online,M,6/15/2010,203955876,7/18/2010,3931,359.8,102.39,835645.3,926392.44,541074.82
-Europe,Moldova ,Europe_Sales_Records_ItemType_7,Offline,H,1/11/2016,583451974,2/5/2016,5260,278.64,13.9,807499.2,525247.5,864116.8
+Europe,Moldova,Europe_Sales_Records_ItemType_7,Offline,H,1/11/2016,583451974,2/5/2016,5260,278.64,13.9,807499.2,525247.5,864116.8
 Europe,Luxembourg,Europe_Sales_Records_ItemType_1,Online,M,1/30/2013,250848186,3/7/2013,407,407.49,86.93,82826.67,73144.17,22683.9
 Europe,Albania,Europe_Sales_Records_ItemType_6,Online,C,11/12/2010,863138997,12/21/2010,865,296.64,255.11,789028.02,838816.04,52988.8
 Europe,Serbia,Europe_Sales_Records_ItemType_9,Online,M,9/23/2013,266614854,10/10/2013,6115,540.58,556.68,6960515.71,6744443.0,3447357.32
@@ -1277,8 +1277,8 @@ Europe,Slovakia,Europe_Sales_Records_ItemType_10,Online,L,3/1/2010,161399304,3/1
 Europe,Hungary,Europe_Sales_Records_ItemType_3,Online,H,8/20/2011,204392325,9/26/2011,3086,987.24,616.86,9284363.68,4757457.63,552369.0
 Europe,Latvia,Europe_Sales_Records_ItemType_2,Offline,M,6/28/2010,400904691,7/12/2010,5462,359.8,102.39,9076872.4,591355.7,589914.69
 Europe,Belgium,Europe_Sales_Records_ItemType_0,Offline,L,12/21/2016,244023358,1/22/2017,789,60.41,57.54,97726.13,62331.58,44436.65
-Europe,Moldova ,Europe_Sales_Records_ItemType_10,Online,H,6/13/2013,830172288,7/29/2013,5283,317.1,442.17,6032136.0,5520987.36,600714.52
-Europe,Moldova ,Europe_Sales_Records_ItemType_6,Offline,L,5/13/2016,815755307,6/9/2016,8978,296.64,255.11,2386291.35,4179278.42,344602.1
+Europe,Moldova,Europe_Sales_Records_ItemType_10,Online,H,6/13/2013,830172288,7/29/2013,5283,317.1,442.17,6032136.0,5520987.36,600714.52
+Europe,Moldova,Europe_Sales_Records_ItemType_6,Offline,L,5/13/2016,815755307,6/9/2016,8978,296.64,255.11,2386291.35,4179278.42,344602.1
 Europe,Austria,Europe_Sales_Records_ItemType_1,Online,M,12/23/2015,870173251,12/30/2015,2457,407.49,86.93,181750.31,77197.93,132150.55
 Europe,Greece,Europe_Sales_Records_ItemType_8,Online,M,8/19/2013,444234168,9/27/2013,7617,430.27,899.35,6188475.99,3694492.68,607816.15
 Europe,Liechtenstein,Europe_Sales_Records_ItemType_1,Offline,H,8/4/2016,545059049,8/8/2016,3940,407.49,86.93,991112.4,811686.0,344179.9
@@ -1293,7 +1293,7 @@ Europe,Lithuania,Europe_Sales_Records_ItemType_1,Offline,C,4/29/2012,530262696,5
 Europe,Switzerland,Europe_Sales_Records_ItemType_10,Online,L,2/26/2016,243521249,3/28/2016,2204,317.1,442.17,894533.6,735362.36,345584.57
 Europe,Iceland,Europe_Sales_Records_ItemType_10,Online,M,1/27/2011,878614270,2/17/2011,342,317.1,442.17,517606.2,74535.43,75835.99
 Europe,Denmark,Europe_Sales_Records_ItemType_5,Offline,H,5/23/2014,954341828,7/11/2014,9809,473.42,85.93,2938218.85,913775.72,455415.74
-Europe,Moldova ,Europe_Sales_Records_ItemType_0,Online,H,9/12/2010,607620608,9/20/2010,7296,60.41,57.54,262503.9,429170.62,707023.55
+Europe,Moldova,Europe_Sales_Records_ItemType_0,Online,H,9/12/2010,607620608,9/20/2010,7296,60.41,57.54,262503.9,429170.62,707023.55
 Europe,Cyprus,Europe_Sales_Records_ItemType_11,Online,L,1/2/2014,561534678,1/29/2014,9445,38.25,85.95,315454.36,521021.96,810036.0
 Europe,Hungary,Europe_Sales_Records_ItemType_5,Offline,L,1/6/2014,768676316,2/8/2014,7259,473.42,85.93,1153248.15,165080.15,130954.12
 Europe,Norway,Europe_Sales_Records_ItemType_10,Offline,L,12/9/2011,337354791,1/28/2012,9634,317.1,442.17,2562590.1,2508793.63,3994703.61
