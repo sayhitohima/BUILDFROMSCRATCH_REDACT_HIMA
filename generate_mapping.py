@@ -1,132 +1,92 @@
-import os
-import json
+import os, json, random, string
 import pandas as pd
-import random
+import numpy as np
+from concurrent.futures import ProcessPoolExecutor
 
 # ================= CONFIGURATION =================
 SOURCE_FOLDER = "mock_sharepoint/source_files"
 CONFIG_FILE = "D:\\himab\\REDACT\\redact_columns.json"
 OUTPUT_MAPPING_FILE = "mapping_file.csv"
+CHUNK_SIZE = 200000 
 # ==================================================
-def load_config():
-    try:
-        with open(CONFIG_FILE, 'r') as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Error loading config: {e}")
-        return None
 
-def is_numeric_value(val):
-    if pd.isna(val): return False
-    try:
-        float(val)
-        return True
-    except (ValueError, TypeError):
-        return False
 
-def generate_length_preserved_number(original_val, used_replacements):
-    """Generates a number preserving sign, length, and precision"""
-    s = str(original_val).strip()
-    
-    # 1. Detect Sign
-    is_negative = s.startswith('-')
-    
-    # 2. Work with the absolute value to calculate length
-    abs_s = s.lstrip('-') 
-    
-    if '.' in abs_s:
-        before, after = abs_s.split('.')
+def get_replacement(val, is_numeric, used_set):
+    """High-speed replacement generator"""
+    s = str(val).strip()
+    if is_numeric:
+        # Precision-preserved numeric logic
+        is_neg = s.startswith('-')
+        abs_s = s.lstrip('-')
+        before, after = abs_s.split('.') if '.' in abs_s else (abs_s, "")
+        
+        # Integer math is 10x faster than string joining
+        b_len, a_len = len(before), len(after)
+        b_val = random.randint(10**(b_len-1), (10**b_len)-1) if b_len > 0 else 0
+        a_val = random.randint(0, (10**a_len)-1) if a_len > 0 else 0
+        
+        res = b_val + (a_val / (10**a_len)) if a_len > 0 else float(b_val)
+        if is_neg: res = -res
+        
+        # Collision check (Rare for 10^len)
+        while res == float(s) or res in used_set:
+            res += 1.0 # Minimal shift to ensure uniqueness
+        used_set.add(res)
+        return res, "numeric"
     else:
-        before, after = abs_s, ""
+        # Format-preserved ID logic
+        res = "".join(random.choice(string.digits if c.isdigit() else string.ascii_uppercase if c.isalpha() else c) for c in s)
+        if res == s: res += "X"
+        used_set.add(res)
+        return res, "string"
 
-    len_before = len(before)
-    len_after = len(after)
+def scan_file(file_info):
+    """Parallel worker to find unique values"""
+    file_name, file_path, settings = file_info
+    cols = settings.get('columns', []) if isinstance(settings, dict) else settings
+    uniques = {col: set() for col in cols}
     
     try:
-        original_float = float(s)
-    except ValueError:
-        original_float = -999999999.999 # Fallback
-
-    while True:
-        # Generate random digits for 'before' (do not count minus sign)
-        first_digit = str(random.randint(1, 9)) if len_before > 0 else "0"
-        remaining_before = "".join([str(random.randint(0, 9)) for _ in range(len_before - 1)])
-        
-        # Generate random digits for 'after'
-        random_after = "".join([str(random.randint(0, 9)) for _ in range(len_after)])
-        
-        # Assemble the number
-        if len_after > 0:
-            replacement_str = f"{first_digit}{remaining_before}.{random_after}"
+        if file_name.endswith('.csv'):
+            # read only needed columns to save RAM
+            for chunk in pd.read_csv(file_path, chunksize=CHUNK_SIZE, usecols=cols, low_memory=False):
+                for col in cols:
+                    uniques[col].update(chunk[col].dropna().astype(str).str.replace(r'\.0$', '', regex=True).str.strip().unique())
         else:
-            replacement_str = f"{first_digit}{remaining_before}"
-        
-        # Apply the sign back
-        if is_negative:
-            replacement_str = "-" + replacement_str
-            
-        replacement_float = float(replacement_str)
-        
-        # Guarantee it is different from original and not used
-        if replacement_float != original_float and replacement_float not in used_replacements:
-            used_replacements.add(replacement_float)
-            return replacement_float
+            df = pd.read_excel(file_path, sheet_name=settings.get('sheet', 0) if isinstance(settings, dict) else 0, usecols=cols)
+            for col in cols:
+                uniques[col].update(df[col].dropna().astype(str).str.replace(r'\.0$', '', regex=True).str.strip().unique())
+        return file_name, uniques
+    except Exception as e:
+        return file_name, None
 
-def read_file_generic(file_path, config_val):
-    if file_path.endswith('.csv'):
-        return pd.read_csv(file_path)
-    elif file_path.endswith('.xlsx'):
-        sheet = config_val.get('sheet', 0) if isinstance(config_val, dict) else 0
-        return pd.read_excel(file_path, sheet_name=sheet)
-    return None
-
-def generate_lookup():
-    files_config = load_config()
-    if not files_config: return
-
+def generate_mapping():
+    config = json.load(open(CONFIG_FILE))
     all_files = [f for f in os.listdir(SOURCE_FOLDER) if f.endswith(('.csv', '.xlsx'))]
-    all_mappings = []
+    tasks = [(f, os.path.join(SOURCE_FOLDER, f), config[f]) for f in all_files if f in config]
+    
+    print(f"Scanning {len(tasks)} files in parallel...")
+    with ProcessPoolExecutor() as executor:
+        results = executor.map(scan_file, tasks)
 
-    for file_name in all_files:
-        if file_name not in files_config: continue
-
-        print(f"Processing {file_name}...")
-        file_path = os.path.join(SOURCE_FOLDER, file_name)
-        file_settings = files_config[file_name]
-        df = read_file_generic(file_path, file_settings)
-        if df is None: continue
-        
-        cols_to_redact = file_settings['columns'] if isinstance(file_settings, dict) else file_settings
+    final_data = []
+    for file_name, uniques in results:
+        if uniques is None: continue
         file_ref = os.path.splitext(file_name)[0].replace(" ", "_")
-
-        for col in cols_to_redact:
-            if col in df.columns:
-                # Extract values, cleaning trailing .0 for consistency
-                unique_vals = df[col].dropna().astype(str).str.replace(r'\.0$', '', regex=True).str.strip().unique()
-                used_replacements = set()
+        for col, vals in uniques.items():
+            used = set()
+            for v in vals:
+                # Logic: If it looks like a number, treat as numeric
+                is_num = True
+                try: float(v)
+                except: is_num = False
                 
-                for val in unique_vals:
-                    if is_numeric_value(val):
-                        replacement = generate_length_preserved_number(val, used_replacements)
-                        dtype = "numeric"
-                    else:
-                        replacement = f"{file_ref}_{col.replace(' ', '')}_{len(used_replacements)}"
-                        dtype = "string"
-                        used_replacements.add(replacement)
-                    
-                    all_mappings.append({
-                        "Original": str(val), 
-                        "Replacement": replacement, 
-                        "SourceFile": file_name,
-                        "ColumnName": col,
-                        "Type": dtype
-                    })
-            else:
-                print(f"  Warning: Column '{col}' not found in {file_name}")
+                rep, dtype = get_replacement(v, is_num, used)
+                final_data.append([v, rep, file_name, col, dtype])
 
-    mapping_df = pd.DataFrame(all_mappings)
-    mapping_df.to_csv(OUTPUT_MAPPING_FILE, index=False)
-    print(f"\nSuccess! Sign-and-Format preserved mapping created at: {OUTPUT_MAPPING_FILE}")
+    pd.DataFrame(final_data, columns=["Original", "Replacement", "SourceFile", "ColumnName", "Type"]).to_csv(OUTPUT_MAPPING_FILE, index=False)
+    print(f"Done! Mapping saved to {OUTPUT_MAPPING_FILE}")
 
 if __name__ == "__main__":
-    generate_lookup()
+    generate_mapping()
+

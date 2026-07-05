@@ -12,8 +12,8 @@
         "sheet": "Data Sales Adidas",
         "columns": ["Retailer", "Total Sales", "Operating Profit"]
     },
-    "Asia Sales Records.csv": [
-        "Item Type", 
-        "Total Revenue"
+    "Asia Sales Report.csv": [
+        "Tot sum", 
+        "AVG","Min","Max","Srate","Rate"
     ]
 }
