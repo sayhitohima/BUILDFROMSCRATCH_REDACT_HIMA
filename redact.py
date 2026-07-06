@@ -20,16 +20,12 @@ def load_config():
         return {}
 
 def get_redaction_data(file_name, master_mapping_df):
-    """
-    Returns two things:
-    1. The list of columns that actually need to be touched.
-    2. The mapping dictionary for those values.
-    """
+    """Returns targeted columns and a high-speed lookup dictionary"""
     file_rules = master_mapping_df[master_mapping_df['SourceFile'] == file_name]
-    
-    # Get ONLY the columns that have mappings for this file
     target_cols = file_rules['ColumnName'].unique().tolist()
     
+    # We build a simple, clean map. 
+    # We handle the '.0' and whitespace during the column processing phase.
     final_map = {}
     for _, row in file_rules.iterrows():
         orig_val = str(row['Original']).strip()
@@ -46,39 +42,36 @@ def process_single_file(file_info):
     
     try:
         if file_name.endswith('.csv'):
-            # Use standard C engine with chunking
+            # FAST READ: Use C engine
             reader = pd.read_csv(full_path, chunksize=CHUNK_SIZE, low_memory=False)
-            redacted_path = os.path.join(DEST_FOLDER, file_name)
             
-            first_chunk = True
+            processed_chunks = [] # Store chunks in memory, write once at the end
+            
             for chunk in reader:
-                # PERFORMANCE BOOST: Only loop through columns that need redaction
-                # This skips 90% of the work for most files
+                # TARGETED REDACTION
                 for col in target_cols:
                     if col in chunk.columns:
-                        # Step 1: Clean the column to match the mapping keys
-                        # We only do this for the targeted column
-                        chunk[col] = chunk[col].astype(str).str.replace(r'\.0$', '', regex=True).str.strip()
+                        # 1. Cast to string and clean .0 once per column
+                        # This is much faster than doing it cell-by-cell
+                        cleaned_series = chunk[col].astype(str).str.replace(r'\.0$', '', regex=True).str.strip()
                         
-                        # Step 2: Vectorized mapping (the fastest possible way in Pandas)
-                        chunk[col] = chunk[col].map(mapping_dict).fillna(chunk[col])
+                        # 2. .map() is the fastest lookup in Pandas
+                        # .fillna() keeps the original value if no match is found in mapping_dict
+                        chunk[col] = cleaned_series.map(mapping_dict).fillna(chunk[col])
                 
-                if first_chunk:
-                    chunk.to_csv(redacted_path, index=False, mode='w')
-                    first_chunk = False
-                else:
-                    chunk.to_csv(redacted_path, index=False, mode='a', header=False)
+                processed_chunks.append(chunk)
+            
+            # PERFORMANCE BOOST: Write all chunks at once instead of looping 'mode=a'
+            final_df = pd.concat(processed_chunks)
+            final_df.to_csv(os.path.join(DEST_FOLDER, file_name), index=False)
                     
         elif file_name.endswith('.xlsx'):
             sheet = file_settings.get('sheet', 0) if isinstance(file_settings, dict) else 0
             df = pd.read_excel(full_path, sheet_name=sheet)
-            
-            # TARGETED REDACTION for Excel
             for col in target_cols:
                 if col in df.columns:
-                    df[col] = df[col].astype(str).str.replace(r'\.0$', '', regex=True).str.strip()
-                    df[col] = df[col].map(mapping_dict).fillna(df[col])
-            
+                    cleaned = df[col].astype(str).str.replace(r'\.0$', '', regex=True).str.strip()
+                    df[col] = cleaned.map(mapping_dict).fillna(df[col])
             df.to_excel(os.path.join(DEST_FOLDER, file_name), index=False)
             
         return f"Successfully redacted: {file_name}"
@@ -94,18 +87,18 @@ def main():
         print(f"Error: {LOOKUP_FILE_PATH} not found!")
         return
     
-    # Force Original to string to avoid mixed-type warnings
     master_mapping_df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str})
     files = [f for f in os.listdir(SOURCE_FOLDER) if f.endswith(('.csv', '.xlsx'))]
     
     tasks = []
     for file_name in files:
         full_path = os.path.join(SOURCE_FOLDER, file_name)
-        # Pre-calculate the targeted columns and the map
         redaction_info = get_redaction_data(file_name, master_mapping_df)
         tasks.append((file_name, full_path, redaction_info, files_config.get(file_name, {})))
 
-    print(f"Executing Surgical Redaction on {len(tasks)} files...")
+    print(f"Starting High-Performance Redaction on {len(tasks)} files...")
+    
+    # ProcessPoolExecutor uses multiple CPU cores
     with ProcessPoolExecutor() as executor:
         results = list(executor.map(process_single_file, tasks))
     
