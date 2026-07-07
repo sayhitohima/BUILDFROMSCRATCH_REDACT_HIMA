@@ -96,7 +96,7 @@ def main():
         return
     
     # Load mapping file as strings
-    master_mapping_df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str})
+    master_mapping_df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str}, low_memory=False)
     files = [f for f in os.listdir(SOURCE_FOLDER) if f.endswith(('.csv', '.xlsx'))]
     
     tasks = []
