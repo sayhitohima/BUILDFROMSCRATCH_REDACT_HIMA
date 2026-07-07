@@ -28,9 +28,7 @@ def get_redaction_map(file_name, master_mapping_df):
         orig_val = str(row['Original']).strip()
         if orig_val.endswith('.0'): 
             orig_val = orig_val[:-2]
-        
-        # Store as is; we will handle type conversion during the write phase
-        final_map[orig_val] = row['Replacement']
+        final_map[orig_val] = str(row['Replacement'])
     return final_map
 
 def clean_value(val):
@@ -45,42 +43,49 @@ def process_single_file(file_info):
     file_name, full_path, mapping_dict, file_settings = file_info
     
     try:
-        # 1. HANDLE EXCEL CONVERSION (Excel must be converted to CSV to be streamed)
+        # 1. HANDLE INPUT CONVERSION
         working_path = full_path
         if file_name.endswith('.xlsx'):
             sheet = file_settings.get('sheet', 0) if isinstance(file_settings, dict) else 0
             df_temp = pd.read_excel(full_path, sheet_name=sheet)
-            working_path = full_path.replace('.xlsx', '_temp_main.csv')
+            working_path = full_path.replace('.xlsx', '_temp_input.csv')
             df_temp.to_csv(working_path, index=False)
 
-        redacted_path = os.path.join(DEST_FOLDER, file_name)
+        # We write the redacted data to a temporary CSV first
+        temp_redacted_csv = os.path.join(DEST_FOLDER, file_name.replace('.xlsx', '_redacted_temp.csv'))
         
-        # 2. STREAMING PROCESSING using native CSV module (NOT PANDAS)
+        # 2. STREAMING PROCESSING using native CSV module
         with open(working_path, mode='r', encoding='utf-8', newline='') as infile:
             reader = csv.reader(infile)
-            header = next(reader) # Read header row
+            header = next(reader)
             
-            # Find the indices of columns that need redaction to avoid searching by name every row
-            # We identify which columns in the CSV match the keys in our mapping
-            # Since the mapping is value-based, we apply it to all columns that 
-            # might contain values present in the mapping_dict.
-            
-            with open(redacted_path, mode='w', encoding='utf-8', newline='') as outfile:
+            with open(temp_redacted_csv, mode='w', encoding='utf-8', newline='') as outfile:
                 writer = csv.writer(outfile)
-                writer.writerow(header) # Write header
+                writer.writerow(header)
                 
                 for row in reader:
-                    # Process every cell in the row
-                    # This is the fastest possible way to iterate in Python
                     new_row = []
                     for cell in row:
                         cleaned = clean_value(cell)
-                        # Direct hash-map lookup (O(1) complexity)
                         new_row.append(mapping_dict.get(cleaned, cell))
                     writer.writerow(new_row)
 
-        # Cleanup temp file
+        # 3. FINAL FORMATTING
+        final_output_path = os.path.join(DEST_FOLDER, file_name)
+        
+        if file_name.endswith('.xlsx'):
+            # Convert the redacted CSV back to a real Excel file
+            df_final = pd.read_csv(temp_redacted_csv)
+            df_final.to_excel(final_output_path, index=False)
+            os.remove(temp_redacted_csv) # Clean up temp redacted CSV
+        else:
+            # For CSVs, we just rename the temp redacted file to the final filename
+            if os.path.exists(final_output_path): os.remove(final_output_path)
+            os.rename(temp_redacted_csv, final_output_path)
+
+        # Cleanup temporary input file
         if working_path != full_path: os.remove(working_path)
+        
         return f"Successfully redacted: {file_name}"
         
     except Exception as e:
@@ -95,8 +100,7 @@ def main():
         print(f"Error: {LOOKUP_FILE_PATH} not found!")
         return
     
-    # Load mapping file as strings
-    master_mapping_df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str}, low_memory=False)
+    master_mapping_df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str})
     files = [f for f in os.listdir(SOURCE_FOLDER) if f.endswith(('.csv', '.xlsx'))]
     
     tasks = []
@@ -105,9 +109,8 @@ def main():
         mapping_dict = get_redaction_map(file_name, master_mapping_df)
         tasks.append((file_name, full_path, mapping_dict, files_config.get(file_name, {})))
 
-    print(f"Processing {len(tasks)} files using Streaming I/O...")
+    print(f"Processing {len(tasks)} files in parallel...")
     
-    # Process in parallel using CPU cores
     with ProcessPoolExecutor() as executor:
         results = list(executor.map(process_single_file, tasks))
     
@@ -116,4 +119,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
