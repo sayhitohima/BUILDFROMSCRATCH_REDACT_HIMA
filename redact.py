@@ -10,7 +10,8 @@ DEST_FOLDER = "mock_sharepoint/vendor_export"
 LOOKUP_FILE_PATH = "mapping_file.csv"
 CONFIG_FILE = "D:\\himab\\REDACT\\redact_columns.json"
 MAX_WORKERS = 4 
-# ==================================================
+# =======import os
+
 
 def load_config():
     try:
@@ -20,22 +21,17 @@ def load_config():
         return {}
 
 def create_nested_global_map():
-    """
-    Creates a nested dictionary: { 'FileName': { 'OriginalVal': 'Replacement' } }
-    This ensures we only redact values that belong to the specific file.
-    """
     print("Loading 3.9M mapping records into nested map... please wait.")
-    df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str, 'Replacement': str, 'SourceFile': str},low_memory=False)
+    # Use usecols to load only what we need to save RAM during initial load
+    df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str, 'Replacement': str, 'SourceFile': str}, low_memory=False)
     
     nested_map = {}
     for row in df.itertuples(index=False):
-        # row[0]=Original, row[1]=Replacement, row[2]=SourceFile
         file_name = str(row[2]).strip()
         orig = str(row[0]).strip()
         if orig.endswith('.0'): 
             orig = orig[:-2]
         
-        # Initialize the inner dictionary for the file if it doesn't exist
         if file_name not in nested_map:
             nested_map[file_name] = {}
         
@@ -51,11 +47,10 @@ def clean_value(val):
     return s
 
 def process_single_file(file_info):
-    # Unpack the nested map
-    file_name, full_path, global_nested_map, file_settings = file_info
+    # CHANGE 1: file_specific_map is now passed directly, NOT the global map
+    file_name, full_path, file_specific_map, file_settings = file_info
     
     try:
-        # 1. HANDLE INPUT CONVERSION
         working_path = full_path
         if file_name.endswith('.xlsx'):
             sheet = file_settings.get('sheet', 0) if isinstance(file_settings, dict) else 0
@@ -63,13 +58,8 @@ def process_single_file(file_info):
             working_path = full_path.replace('.xlsx', '_temp_input.csv')
             df_temp.to_csv(working_path, index=False)
 
-        # --- THE KEY STEP: GET THE MAP FOR THIS SPECIFIC FILE ---
-        # We extract the specific dictionary for this file from the global nested map
-        file_specific_map = global_nested_map.get(file_name, {})
-        
         temp_redacted_csv = os.path.join(DEST_FOLDER, file_name.replace('.xlsx', '_redacted_temp.csv'))
         
-        # 2. STREAMING REDACTION
         with open(working_path, mode='r', encoding='utf-8', newline='') as infile:
             reader = csv.reader(infile)
             header = next(reader)
@@ -86,7 +76,7 @@ def process_single_file(file_info):
                         cell = row[i]
                         if not cell: continue
                         
-                        # Only replace if the value exists in the map FOR THIS FILE
+                        # The lookup is now against a much smaller, file-specific dictionary
                         if cell in file_specific_map:
                             row[i] = file_specific_map[cell]
                         else:
@@ -95,10 +85,9 @@ def process_single_file(file_info):
                                 row[i] = file_specific_map[cleaned]
                     writer.writerow(row)
 
-        # 3. FINAL FORMATTING
         final_output_path = os.path.join(DEST_FOLDER, file_name)
         if file_name.endswith('.xlsx'):
-            df_final = pd.read_csv(temp_redacted_csv,low_memory=False)
+            df_final = pd.read_csv(temp_redacted_csv, low_memory=False)
             df_final.to_excel(final_output_path, index=False)
             os.remove(temp_redacted_csv)
         else:
@@ -120,18 +109,20 @@ def main():
         print(f"Error: {LOOKUP_FILE_PATH} not found!")
         return
     
-    # Step 1: Load the massive map into a Nested Dictionary
     global_nested_map = create_nested_global_map()
-    
     files = [f for f in os.listdir(SOURCE_FOLDER) if f.endswith(('.csv', '.xlsx'))]
     
     tasks = []
     for file_name in files:
         full_path = os.path.join(SOURCE_FOLDER, file_name)
-        # Pass the entire nested dictionary; processes will access their specific key
-        tasks.append((file_name, full_path, global_nested_map, files_config.get(file_name, {})))
+        
+        # CHANGE 2: Extract the specific map for this file RIGHT HERE.
+        # Only the slice needed for this file is passed to the ProcessPool.
+        file_specific_map = global_nested_map.get(file_name, {})
+        
+        tasks.append((file_name, full_path, file_specific_map, files_config.get(file_name, {})))
 
-    print(f"Processing {len(tasks)} files using File-Aware Surgical Streaming...")
+    print(f"Processing {len(tasks)} files using Memory-Optimized Surgical Streaming...")
     
     with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
         results = list(executor.map(process_single_file, tasks))
@@ -141,3 +132,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
