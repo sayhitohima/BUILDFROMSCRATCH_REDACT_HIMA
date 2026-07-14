@@ -12,8 +12,16 @@
         "sheet": "Data Sales Adidas",
         "columns": ["Retailer", "Total Sales", "Operating Profit"]
     },
-    "Asia Sales Report.csv": [
-        "Tot sum", 
-        "AVG","Min","Max","Srate","Rate"
-    ]
+    "Asia Sales Report.xlsx": {
+        "sheet": "Asia Sales Report",
+        "columns":["Tot sum", 
+        "AVG","Min","Max","Srate","Rate","exercise_name"],
+        "ref_mapping": {
+            "exercise_name": { "truth_file": "truth_mapping.xlsx", "key_col": "exercise_name", "id_col": "EXID" }
+        }
+    },
+    "Fitness Program.xlsx": {
+        "sheet": "Fitness Program",
+        "columns": ["exercise_name", "equipment", "reps"]
+    }
 }
