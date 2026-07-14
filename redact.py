@@ -2,7 +2,7 @@ import os
 import json
 import csv
 import pandas as pd
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor#processpool
 
 # ================= CONFIGURATION =================
 SOURCE_FOLDER = "mock_sharepoint/source_files"
@@ -10,8 +10,7 @@ DEST_FOLDER = "mock_sharepoint/vendor_export"
 LOOKUP_FILE_PATH = "mapping_file.csv"
 CONFIG_FILE = "D:\\himab\\REDACT\\redact_columns.json"
 MAX_WORKERS = 4 
-# =======import os
-
+# ==================================================
 
 def load_config():
     try:
@@ -21,21 +20,26 @@ def load_config():
         return {}
 
 def create_nested_global_map():
-    print("Loading 3.9M mapping records into nested map... please wait.")
-    # Use usecols to load only what we need to save RAM during initial load
+    print("Loading mapping records into prioritized maps... please wait.")
     df = pd.read_csv(LOOKUP_FILE_PATH, dtype={'Original': str, 'Replacement': str, 'SourceFile': str}, low_memory=False)
     
+    # nested_map[file_name] will now contain two sub-dictionaries: 'exact' and 'lower'
     nested_map = {}
     for row in df.itertuples(index=False):
         file_name = str(row[2]).strip()
         orig = str(row[0]).strip()
+        replacement = str(row[1])
+        
         if orig.endswith('.0'): 
             orig = orig[:-2]
         
         if file_name not in nested_map:
-            nested_map[file_name] = {}
+            nested_map[file_name] = {'exact': {}, 'lower': {}}
         
-        nested_map[file_name][orig] = str(row[1])
+        # 1. Store exact match for high priority
+        nested_map[file_name]['exact'][orig] = replacement
+        # 2. Store lowercase match for fallback priority
+        nested_map[file_name]['lower'][orig.lower()] = replacement
         
     return nested_map
 
@@ -47,7 +51,6 @@ def clean_value(val):
     return s
 
 def process_single_file(file_info):
-    # CHANGE 1: file_specific_map is now passed directly, NOT the global map
     file_name, full_path, file_specific_map, file_settings = file_info
     
     try:
@@ -60,6 +63,10 @@ def process_single_file(file_info):
 
         temp_redacted_csv = os.path.join(DEST_FOLDER, file_name.replace('.xlsx', '_redacted_temp.csv'))
         
+        # Split the map into exact and lower for faster local lookup
+        exact_map = file_specific_map.get('exact', {})
+        lower_map = file_specific_map.get('lower', {})
+
         with open(working_path, mode='r', encoding='utf-8', newline='') as infile:
             reader = csv.reader(infile)
             header = next(reader)
@@ -76,13 +83,22 @@ def process_single_file(file_info):
                         cell = row[i]
                         if not cell: continue
                         
-                        # The lookup is now against a much smaller, file-specific dictionary
-                        if cell in file_specific_map:
-                            row[i] = file_specific_map[cell]
+                        # PRIORITY 1: Exact Match
+                        if cell in exact_map:
+                            row[i] = exact_map[cell]
                         else:
+                            # PRIORITY 2: Cleaned/Standardized Exact Match
                             cleaned = clean_value(cell)
-                            if cleaned in file_specific_map:
-                                row[i] = file_specific_map[cleaned]
+                            if cleaned in exact_map:
+                                row[i] = exact_map[cleaned]
+                            else:
+                                # PRIORITY 3: Case-Insensitive Fallback
+                                cell_lower = cell.lower()
+                                if cell_lower in lower_map:
+                                    row[i] = lower_map[cell_lower]
+                                elif cleaned.lower() in lower_map:
+                                    row[i] = lower_map[cleaned.lower()]
+                                    
                     writer.writerow(row)
 
         final_output_path = os.path.join(DEST_FOLDER, file_name)
@@ -115,14 +131,10 @@ def main():
     tasks = []
     for file_name in files:
         full_path = os.path.join(SOURCE_FOLDER, file_name)
-        
-        # CHANGE 2: Extract the specific map for this file RIGHT HERE.
-        # Only the slice needed for this file is passed to the ProcessPool.
         file_specific_map = global_nested_map.get(file_name, {})
-        
         tasks.append((file_name, full_path, file_specific_map, files_config.get(file_name, {})))
 
-    print(f"Processing {len(tasks)} files using Memory-Optimized Surgical Streaming...")
+    print(f"Processing {len(tasks)} files using Prioritized Redaction Logic...")
     
     with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
         results = list(executor.map(process_single_file, tasks))
@@ -132,4 +144,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
